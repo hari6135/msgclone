@@ -11,7 +11,7 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const handleSignUp = () => {
-    // Dummy authentication logic, replace with your actual authentication logic
+  
     if (name.trim() !== '' && email.trim() !== '' && password.trim() !== '') {
       // Successful sign-up
       toast.success(`Welcome, ${name}!`, {
@@ -53,7 +53,7 @@ const SignUp = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder='Password'
-          />
+            />
         </div>
         <div className="button-group">
           <button className="sign" onClick={handleSignUp}>Sign Up</button>

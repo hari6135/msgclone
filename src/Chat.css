@@ -1,5 +1,5 @@
 .navbar {
-  background: linear-gradient(135deg, #0000009d, #95a7b47d); /* Gradient background */
+  background: linear-gradient(135deg,#4b6cb7, #182848); 
   padding: 5px;
   padding-right: 8px;
   border-radius: 15px; /* Updated border-radius to match the container */
@@ -13,6 +13,7 @@
 .profile-container {
   display: flex;
   align-items: center;
+  
 }
 
 .profile-photo {
@@ -34,7 +35,7 @@
 }
 
 .navbar-text {
-  color: #fff; /* White text color */
+  color: #ffffff; /* White text color */
   font-size: 16px;
   font-weight: bold;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Text shadow for readability */
@@ -91,28 +92,43 @@
     margin-top: auto; /* Align to the bottom */
     display: flex;
     flex-direction: column-reverse; /* Stack messages from bottom to top */
+
   }
   .message-wrapper {
     background-color: #3498db;
     border: 1px solid #ddd;
     border-radius: 20px;
     padding: 8px;
-    margin-bottom: 8px;
-    display: inline-block; /* Change from block to inline-block */
+    margin-bottom: 10px;
+    display: inline-block;
     align-self: flex-end;
     text-align: right;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
-    max-width: 70%; /* Set a maximum width for the message */
-    word-wrap: break-word; /* Allow the message to break into a new line if needed */
-}
-
-.message-wrapper:nth-child(even) {
-    align-self: flex-end;
-    text-align: right;
-}
-
-
+    max-width: 70%;
+    word-wrap: break-word;
+  }
+  
+  .message-wrapper.user {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  
+  .message-wrapper.bot {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #3d40429a; 
+    align-self: flex-start;
+    text-align: left;
+  }
+  
+  .message-wrapper:nth-child(even) {
+    text-align: left;
+  }
+  
+  .message-wrapper:nth-child(even).bot {
+    align-self: flex-start; /* Align even bot messages to the left */
+    text-align: left;
+  }
+  
   .input-container {
     width: 100%;
     bottom: 10px;
@@ -123,7 +139,7 @@
     }
 
 .message-input {
-  
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     width: 100%;
     padding-right: 10px; 
     border-radius: 25px;

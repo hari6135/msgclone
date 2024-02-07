@@ -8,22 +8,32 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState('');
   const [userProfile, setUserProfile] = useState({
-    name: username || 'Your Name', // Use the passed username or default to 'Your Name'
+    name: username || 'Your Name',
     profilePhoto: 'https://i.pinimg.com/originals/16/2d/2c/162d2cb212537fe50230b73bb7af57f7.jpg',
   });
+  const [showProfileModal, setShowProfileModal] = useState(false);
 
   useEffect(() => {
-    // Use effect to update the username when it changes
     setUserProfile((prevProfile) => ({
       ...prevProfile,
       name: username,
     }));
   }, [username]);
 
+  const getResponse = () => {
+    return 'Hi';
+  };
+
   const sendMessage = () => {
     if (messageInput.trim() !== '') {
-      setMessages([{ text: messageInput, user: userProfile.name }, ...messages]);
+      const userMessage = { text: messageInput, user: userProfile.name, type: 'user' };
+      setMessages((prevMessages) => [userMessage, ...prevMessages]);
       setMessageInput('');
+
+      setTimeout(() => {
+        const botResponse = { text: getResponse(), user: 'ChatBot', type: 'bot' };
+        setMessages((prevMessages) => [botResponse, ...prevMessages]);
+      }, 2000);
     }
   };
 
@@ -33,16 +43,24 @@ const Chat = () => {
     }
   };
 
+  const openProfileModal = () => {
+    setShowProfileModal(true);
+  };
+
+  const closeProfileModal = () => {
+    setShowProfileModal(false);
+  };
+
   return (
     <div className="chat-body">
       <div className="chat-container">
-        {/* Navbar with Profile Photo and Name */}
         <div className="navbar">
           <div className="profile-container">
             <img
               src={userProfile.profilePhoto}
               alt="Profile"
               className="profile-photo"
+              onClick={openProfileModal}
             />
             <p className="profile-name">{userProfile.name}</p>
           </div>
@@ -51,7 +69,10 @@ const Chat = () => {
 
         <div className="message-container">
           {messages.map((msg, index) => (
-            <div key={index} className="message-wrapper">
+            <div
+              key={index}
+              className={`message-wrapper ${msg.type === 'user' ? 'user' : 'bot'}`}
+            >
               <strong className="message-text">{msg.user}:</strong> {msg.text}
             </div>
           ))}
@@ -71,6 +92,16 @@ const Chat = () => {
           </button>
         </div>
       </div>
+
+      {showProfileModal && (
+        <div className="profile-modal">
+          <div className="modal-content">
+            <span className="close" onClick={closeProfileModal}>&times;</span>
+            <img src={userProfile.profilePhoto} alt="Profile" className="modal-profile-photo" />
+            <p className="modal-profile-name">{userProfile.name}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
